@@ -1,0 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Restaurants.Models.Restaurant //tells controller what type of information to expect
+<p><strong>NOTE:</strong> You need to have at least one cuisine before you can add a restaurant!</p>
+<p>Go to @Html.ActionLink("this page", "Create", "Cuisines") to add a cuisine.
+  
+<h4>Add a new restaurant</h4>
+@using (Html.BeginForm()) //html helper to signal that we have a form with a POSTHtml request
+{
+  @Html.LabelFor(model => model.Description) //this is the label for the text box
+  @Html.TextBoxFor(model => model.Description) //this is the text box.
+  
+  @Html.LabelFor(model => model.Cuisine)
+  @Html.DropDownList("CuisineId") //viewbag.
+
+  <input type="submit" value="Add new restaurant" />
+} <!-- marks the end of the form-->
+
+
+<p>@Html.ActionLink("Show all restaurants", "Index")</p>

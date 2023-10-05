@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Restaurants.Models.Cuisine
+@using Restaurants.Models
+
+<h2>Cuisine Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+
+@if (@Model.Restaurants.Count == 0) //check if no categories have been added
+{
+  <h3>No restaurants have been added to this cuisine yet!</h3>
+} 
+else
+{
+  <h3>Restaurants:</h3>
+  <ul>
+    @foreach (Restaurant restaurant in Model.Restaurants) //for each restaurant in the restaurants belonging to this category
+    {
+      <li>@Html.ActionLink($"{restaurant.Description}", "Details", "Restaurants", new { id = restaurant.RestaurantId })</li> //make a list of each item as action links, linking to the details of each item
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Cuisine", "Edit", new { id = Model.CuisineId })</p>
+<p>@Html.ActionLink("Delete Cuisine", "Delete", new { id = Model.CuisineId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>
